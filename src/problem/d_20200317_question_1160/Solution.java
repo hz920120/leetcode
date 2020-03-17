@@ -2,7 +2,7 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package d_20200317_question_1160;
+package problem.d_20200317_question_1160;
 
 import java.util.*;
 

@@ -2,14 +2,10 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package d_20200314_question475;
-
-import sun.tools.attach.HotSpotVirtualMachine;
+package problem.d_20200314_question475;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Winter is coming! Your first job during the contest is to design a standard heater with fixed warm radius to warm all the houses.
