@@ -31,36 +31,15 @@ package problem.d_20200318_question_836;
 public class Solution {
     public static boolean isRectangleOverlap(int[] rec1, int[] rec2) {
         //rec[2]-rec[0]为投影到x轴边长，rec[3]-rec[1]为投影到y轴边长
-//        //保证rec2的面积始终比rec1小
-//        if ((rec1[2] - rec1[0])*(rec1[3]-rec1[1]) < (rec2[2] - rec2[0]) * (rec2[3]-rec2[1])){
-//            return isRectangleOverlap(rec2,rec1);
-//        }
-        if (rec2[3] < rec1[1] || rec2[2] < rec1[0]){
-            return false;
-        }
-        //rec2的任意端点在rec1的内
+        //rec1的x轴投影与rec2的x轴投影有重合 && rec1的y轴投影与rec2的y轴投影有重合即满足条件
+        //可以对例外情况取非
 
-        boolean b = false;
-        if (isInnerPoint(rec2[0],rec2[1],rec1) ||
-            isInnerPoint(rec2[2],rec2[1],rec1) ||
-            isInnerPoint(rec2[2],rec2[3],rec1) ||
-            isInnerPoint(rec2[0],rec2[3],rec1)
-        ){
-            b = true;
-        }
+        boolean isXLap = !(rec1[2] <= rec2[0] || rec1[0] >= rec2[2]);
+        boolean isYLap = !(rec1[3] <= rec2[1] || rec1[1] >= rec2[3]);
 
-
-        return false;
+        return isXLap && isYLap;
     }
 
-    private static boolean isInnerPoint(int x, int y, int[] rec){
-        if (rec[0]<x && x <rec[2]){
-            if (rec[1]<= y && y <= rec[3]){
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static void main(String[] args) {
         //Input: rec1 = [0,0,2,2], rec2 = [1,1,3,3]
