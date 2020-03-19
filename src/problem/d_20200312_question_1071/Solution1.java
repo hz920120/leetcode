@@ -2,7 +2,7 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package problem.d_20200312_question1071;
+package problem.d_20200312_question_1071;
 
 /**
  * @author huangzuo
