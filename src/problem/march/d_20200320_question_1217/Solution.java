@@ -77,7 +77,7 @@ public class Solution {
 
 
 
-//    public int minCostToMoveChips(int[] chips) {
+//    public int minCostToMoveChips1(int[] chips) {
 //
 //        int length = chips.length;
 //        double half = Double.valueOf(length)/2;
