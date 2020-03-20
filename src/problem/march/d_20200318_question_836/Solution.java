@@ -2,7 +2,7 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package problem.d_20200318_question_836;
+package problem.march.d_20200318_question_836;
 
 /**
  * A rectangle is represented as a list [x1, y1, x2, y2], where (x1, y1) are the coordinates of its bottom-left corner, and (x2, y2) are the coordinates of its top-right corner.

@@ -2,7 +2,7 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package problem.d_20200314_question_475;
+package problem.march.d_20200314_question_475;
 
 /**
  * 1.对于每个房屋，要么用前面的暖气，要么用后面的，二者取近的，得到距离；
