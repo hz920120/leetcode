@@ -4,6 +4,8 @@
  */
 package problem.march.d_20200323_question_876;
 
+import utils.ListNode;
+
 /**
  *
  * 快慢指针法
@@ -53,9 +55,4 @@ public class Solution1 {
     }
 
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
 }

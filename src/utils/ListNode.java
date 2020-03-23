@@ -9,7 +9,7 @@ package utils;
  * @version : ListNode.java, v 0.1 2020年03月23日 11:24 下午 huangzuo Exp $
  */
 public class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) { val = x; }
+    private int val;
+    public ListNode next;
+    public ListNode(int x) { val = x; }
 }

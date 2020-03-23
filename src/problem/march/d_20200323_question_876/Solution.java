@@ -4,6 +4,8 @@
  */
 package problem.march.d_20200323_question_876;
 
+import utils.ListNode;
+
 import java.util.List;
 
 /**
@@ -78,10 +80,4 @@ public class Solution {
         System.out.println("1");
     }
 
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
 }
