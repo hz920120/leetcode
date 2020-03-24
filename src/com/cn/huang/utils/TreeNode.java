@@ -9,7 +9,7 @@ package com.cn.huang.utils;
  * @version : TreeNode.java, v 0.1 2020年03月23日 11:23 下午 huangzuo Exp $
  */
 public class TreeNode {
-    private int val;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     public TreeNode(int x) { this.val = x; }
