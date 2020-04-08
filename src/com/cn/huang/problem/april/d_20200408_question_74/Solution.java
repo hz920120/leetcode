@@ -36,6 +36,7 @@ package com.cn.huang.problem.april.d_20200408_question_74;
  */
 public class Solution {
 
+    //二分法
     public boolean searchMatrix(int[][] matrix, int target) {
         if (matrix.length == 0 || matrix[0].length == 0){return false;}
         int m = matrix.length;
