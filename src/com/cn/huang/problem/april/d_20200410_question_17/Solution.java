@@ -4,9 +4,7 @@
  */
 package com.cn.huang.problem.april.d_20200410_question_17;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -31,7 +29,8 @@ public class Solution {
 
     static HashMap<Integer, String> map = new HashMap<>();
     private static List<String> res = new ArrayList<>();
-    private boolean[][] visited;
+    private HashMap<String, Boolean> visited;
+    private Deque<Integer> storage;
     static {
         map.put(2,"abc");
         map.put(3,"def");
@@ -44,38 +43,61 @@ public class Solution {
     }
 
     public List<String> letterCombinations(String digits) {
-
-        char[] nums = digits.toCharArray();
-        visited = new boolean[10][10];
-        for (char x : nums){
-            for (char y : nums){
-                split(x,y);
-            }
+        if (digits == null || digits.length() == 0){return res;}
+        char[] chs = digits.toCharArray();
+        //存储digits里边的元素
+        storage  = new ArrayDeque<>(chs.length);
+        for (char ch : chs){
+            storage.push(ch - '0');
         }
-        return res;
+
+        ret(storage);
+        return null;
     }
 
-    private void split(char cx,char cy){
-        int x = cx-'0';
-        int y = cy-'0';
-        if (visited[x][y] || visited[y][x] || x==y){return;}
-        dfs(x,y);
-        visited[x][y] = true;
-        visited[y][x] = true;
+    private void ret(Deque<Integer> storage){
+        while (storage.size() > 0){
+
+        }
+    }
+
+    private void dfs1(String ori,Integer next){
+        if (next == null){return;}
+        for (char ch : map.get(next).toCharArray()){
+            StringBuilder sb = new StringBuilder(ori);
+            sb.append(ch);
+            if (storage.size() > 0){
+                dfs1(sb.toString(),storage.pop());
+            }else {
+                res.add(sb.toString());
+                //剪枝，例如：sb="ad",则"da"也被访问过
+            }
+        }
+    }
+
+    private void cut(String str,String str1){
+        if (str.equals("")){return;}
+        char[] chs = str.toCharArray();
+        for (char ch : chs){
+
+        }
+
     }
 
 
     private void dfs(int left,int right) {
         char[] lefts = map.get(left).toCharArray();
         char[] rights = map.get(right).toCharArray();
-        for (char l : lefts){
-            for (char r : rights){
+        for (char l : lefts) {
+            for (char r : rights) {
                 StringBuilder sb = new StringBuilder();
                 sb.append(l).append(r);
-                res.add(sb.toString());
+                dfs1(sb.toString(),storage.pop());
             }
         }
     }
+
+
 
     public static void main(String[] args) {
         Solution solution = new Solution();
