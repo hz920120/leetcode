@@ -9,7 +9,7 @@ package com.cn.huang.utils;
  * @version : ListNode.java, v 0.1 2020年03月23日 11:24 下午 huangzuo Exp $
  */
 public class ListNode {
-    private int val;
+    public int val;
     public ListNode next;
     public ListNode(int x) { this.val = x; }
 }
