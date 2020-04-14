@@ -14,77 +14,30 @@ import java.util.*;
  */
 public class Solution {
 
-    private Deque<Integer> ln1 = new ArrayDeque<>();
-    private Deque<Integer> ln2 = new ArrayDeque<>();
-    private int length;
-
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
-        ln1.push(l1.val);
-        num1(l1);
-
-        ln2.push(l2.val);
-        num2(l2);
-
-        StringBuilder sb1 = new StringBuilder();
-        StringBuilder sb2 = new StringBuilder();
-
-        while (ln1.size() > 0){
-            sb1.append(ln1.pop());
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        while (l1 != null) {
+            stack1.push(l1.val);
+            l1 = l1.next;
         }
-        while (ln2.size() > 0){
-            sb2.append(ln2.pop());
+        while (l2 != null) {
+            stack2.push(l2.val);
+            l2 = l2.next;
         }
 
-        String str;
-        char[] sum = String.valueOf(Integer.valueOf(sb1.reverse().toString()) + Integer.valueOf(sb2.reverse().toString())).toCharArray();
-
-        //7807
-
-        List<Integer> res = new LinkedList<>();
-        for (int i = 0; i < sum.length; i++) {
-            res.add(sum[i]-'0');
+        int carry = 0;
+        ListNode head = null;
+        while (!stack1.isEmpty() || !stack2.isEmpty() || carry > 0) {
+            int sum = carry;
+            sum += stack1.isEmpty()? 0: stack1.pop();
+            sum += stack2.isEmpty()? 0: stack2.pop();
+            ListNode node = new ListNode(sum % 10);
+            node.next = head;
+            head = node;
+            carry = sum / 10;
         }
-        length = res.size();
-
-        ListNode listNode = new ListNode(0);
-        addNode(listNode,res,0);
-        return listNode;
+        return head;
     }
 
-    private void addNode(ListNode f,List<Integer> res,int n){
-        if (n == length){f = null;return;}
-        f.val = res.get(n);
-        if (n != length - 1) {f.next = new ListNode(0);}
-        addNode(f.next,res,n+1);
-    }
-
-    private void num1(ListNode ln){
-        if (ln.next == null){
-            return ;
-        }
-        ln1.push(ln.next.val);
-        num1(ln.next);
-    }
-
-    private void num2(ListNode ln){
-        if (ln.next == null){
-            return;
-        }
-        ln2.push(ln.next.val);
-        num2(ln.next);
-    }
-
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-
-        ListNode listNode = new ListNode(1);
-        List<Integer> res = new LinkedList<>();
-        res.add(2);
-        res.add(3);
-        res.add(4);
-        solution.length = res.size();
-        solution.addNode(listNode,res,0);
-        System.out.println(1);
-    }
 }
