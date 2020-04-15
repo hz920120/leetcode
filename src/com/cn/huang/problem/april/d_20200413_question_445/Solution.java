@@ -2,7 +2,7 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package com.cn.huang.problem.april;
+package com.cn.huang.problem.april.d_20200413_question_445;
 
 import com.cn.huang.utils.ListNode;
 
