@@ -35,34 +35,29 @@ public class Solution {
 
     public int minDepth(TreeNode root) {
         if (root == null){return 0;}
-        int left = leftDepth(root,1);
-        int right = rightDepth(root,1);
-        if (left == 1 || right == 1){
-            return Math.max(left,right);
-        }else {
-            return Math.min(left,right);
-        }
-    }
 
-    private int leftDepth(TreeNode treeNode,int dep){
-        if (treeNode.left!=null){
-            return leftDepth(treeNode.left,dep+1);
-        }else {
-            return dep;
+        int res = 1;
+        //均没有子节点：为叶子节点，返回0
+        if (root.right == null && root.left == null){
+            return 1;
         }
-    }
+        //均有子节点：取左右叶子节点的最小深度
+        if (root.left != null && root.right!=null){
+            res = res + Math.min(minDepth(root.left),minDepth(root.right)) ;
+        }
+        //缺少其中一个子节点：取左右子节点的最大深度
+        if (root.left == null || root.right == null){
+            res = res + Math.max(minDepth(root.left),minDepth(root.right)) ;
+        }
 
-    private int rightDepth(TreeNode treeNode,int dep){
-        if (treeNode.right!=null){
-            return rightDepth(treeNode.right,dep+1);
-        }else {
-            return dep;
-        }
+
+        return res;
+
     }
 
     public static void main(String[] args) {
         TreeNode treeNode = TreeNode.mkTree("[3,9,20,null,null,15,7]");
         Solution solution = new Solution();
-        solution.minDepth(treeNode);
+        System.out.println(solution.minDepth(treeNode));
     }
 }
