@@ -5,15 +5,36 @@
 package com.cn.huang.problem.april.d_20200420_question_200;
 
 /**
+ * Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+ *
+ * Example 1:
+ *
+ * Input:
+ * 11110
+ * 11010
+ * 11000
+ * 00000
+ *
+ * Output: 1
+ * Example 2:
+ *
+ * Input:
+ * 11000
+ * 11000
+ * 00100
+ * 00011
+ *
+ * Output: 3
+ *
  * @author huangzuo
  * @version : Solution.java, v 0.1 2020年04月20日 8:42 下午 huangzuo Exp $
  */
 public class Solution {
-    private char[][] ori;
-    private int m;
-    private int n;
-    int[] dx = new int[]{-1,1,0,0};
-    int[] dy = new int[]{0,0,-1,1};
+    private static char[][] ori;
+    private static int m;
+    private static int n;
+    private static int[] dx = new int[]{-1,1,0,0};
+    private static int[] dy = new int[]{0,0,-1,1};
 
     public int numIslands(char[][] grid) {
         if (grid.length == 0){
