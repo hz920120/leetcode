@@ -5,6 +5,8 @@
 package com.cn.huang.array;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -27,17 +29,35 @@ import java.util.Arrays;
  * @version : SingleNumber.java, v 0.1 2020年04月23日 11:34 下午 huangzuo Exp $
  */
 public class SingleNumber {
+//    public int singleNumber(int[] nums) {
+//        if (nums.length == 0){return 0;}
+//        Arrays.sort(nums);
+//
+//        for (int i = 0; i < nums.length - 2; i++) {
+//            if (nums[i] == nums[i + 1]) {
+//                i++;
+//            }else {
+//                return nums[i];
+//            }
+//        }
+//        return nums[nums.length - 1];
+//    }
+
     public int singleNumber(int[] nums) {
         if (nums.length == 0){return 0;}
-        Arrays.sort(nums);
-
-        for (int i = 0; i < nums.length - 2; i++) {
-            if (nums[i] == nums[i + 1]) {
-                i++;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (Integer i : nums){
+            if (map.get(i) == null){
+                map.put(i,1);
             }else {
-                return nums[i];
+                map.put(i,2);
             }
         }
-        return nums[nums.length - 1];
+        for (Integer key : map.keySet()){
+            if (map.get(key) == 1){
+                return key;
+            }
+        }
+        return -1;
     }
 }
