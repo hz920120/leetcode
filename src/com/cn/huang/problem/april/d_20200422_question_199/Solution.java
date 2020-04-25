@@ -36,7 +36,7 @@ public class Solution {
         if (root == null){return res;}
         Queue<TreeNode> queue = new LinkedList<>();
         //根节点加入队列
-        queue.add(root);
+        queue.offer(root);
         while (!queue.isEmpty()){
             int len = queue.size();
             for (int i = 0; i < len; i++) {
