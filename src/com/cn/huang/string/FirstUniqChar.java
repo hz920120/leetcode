@@ -25,28 +25,28 @@ public class FirstUniqChar {
         int len = s.length();
         if (len == 0){return -1;}
         if (len == 1){return 0;}
-        Map<Character,Integer> map = new HashMap<>();
+        List<Character> list = new ArrayList<>();
+        List<Character> repeat = new ArrayList<>();
+        List<Character> all = new ArrayList<>();
         char[] ele = s.toCharArray();
         for (int i = 0; i < s.length(); i++) {
-            if (map.get(ele[i]) == null){
-                map.put(ele[i],i);
+            all.add(ele[i]);
+            if (repeat.contains(ele[i])){
+                continue;
+            }
+            if (!list.contains(ele[i])){
+                list.add(ele[i]);
             }else {
-                map.put(ele[i],-2);
+                list.remove(list.indexOf(ele[i]));
+                repeat.add(ele[i]);
             }
         }
 
-        int res = Integer.MAX_VALUE;
-        for (Integer v : map.values()){
-            if (v != -2){
-                res = v < res ? v : res;
-            }
-        }
-
-        return res == Integer.MAX_VALUE ? -1 : res;
+        return list.isEmpty() ? -1 : all.indexOf(list.get(0));
     }
 
     public static void main(String[] args) {
         FirstUniqChar firstUniqChar = new FirstUniqChar();
-        System.out.println(firstUniqChar.firstUniqChar("loveleetcode"));
+        System.out.println(firstUniqChar.firstUniqChar("cc"));
     }
 }
