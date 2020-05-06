@@ -34,37 +34,26 @@ package com.cn.huang.array;
  */
 public class RotateMatrix {
     public void rotate(int[][] matrix) {
-        int x = matrix.length,y = x;
-        if (x == 0){return;}
-        boolean[][] isRotate = new boolean[x][y];
+        int n = matrix.length,temp;
+        if (n == 0){return;}
 
         //对角线旋转
-        for (int i = 0; i < x; i++) {
-            for (int j = 0; j < y; j++) {
-                if (i == j) {continue;}
-                else {
-                    if (isRotate[i][j]){continue;}
-                    else {
-                        int temp = matrix[i][j];
-                        matrix[i][j] = matrix[j][i];
-                        matrix[j][i] = temp;
-                        isRotate[i][j] = true;
-                        isRotate[j][i] = true;
-                    }
-                }
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
             }
         }
 
         //竖直中线对折
-        isRotate = new boolean[x][y];
-        for (int i = 0; i < x ; i++) {
-            for (int j = 0; j < x/2; j++) {
-                int temp = matrix[i][j];
-                matrix[i][j] = matrix[i][x-1-j];
-                matrix[i][x-1-j] = temp;
+        for (int i = 0; i < n ; i++) {
+            for (int j = 0; j < n/2; j++) {
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[i][n-1-j];
+                matrix[i][n-1-j] = temp;
             }
         }
-
         return;
     }
 }
