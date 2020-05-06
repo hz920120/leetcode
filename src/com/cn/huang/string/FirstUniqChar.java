@@ -4,9 +4,7 @@
  */
 package com.cn.huang.string;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
@@ -27,7 +25,7 @@ public class FirstUniqChar {
         int len = s.length();
         if (len == 0){return -1;}
         if (len == 1){return 0;}
-        Map<Character,Integer> map = new LinkedHashMap<>();
+        Map<Character,Integer> map = new HashMap<>();
         char[] ele = s.toCharArray();
         for (int i = 0; i < s.length(); i++) {
             if (map.get(ele[i]) == null){
@@ -37,13 +35,14 @@ public class FirstUniqChar {
             }
         }
 
-        for (Map.Entry<Character,Integer> entry : map.entrySet()){
-            if (entry.getValue() != -2){
-                return entry.getValue();
+        int res = Integer.MAX_VALUE;
+        for (Integer v : map.values()){
+            if (v != -2){
+                res = v < res ? v : res;
             }
         }
 
-        return -1;
+        return res == Integer.MAX_VALUE ? -1 : res;
     }
 
     public static void main(String[] args) {
