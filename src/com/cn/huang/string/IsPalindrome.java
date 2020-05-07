@@ -26,30 +26,26 @@ package com.cn.huang.string;
 public class IsPalindrome {
     public boolean isPalindrome(String s) {
         if (s.length() == 0){return true;}
-        s = s.toLowerCase();
-        int a = 'a';
-        int z = 'z';
-        int zero = '0';
-        int nine = '9';
+        StringBuffer sb = new StringBuffer();
         char[] ele = s.toCharArray();
         for (int i = 0; i < ele.length; i++) {
             //ACSII码不在a-z的范围内
-            if (!(ele[i] >= zero && ele[i] <= nine) && !(ele[i] >= a && ele[i] <= z)){
-                s = s.replace(ele[i],' ');
+            if ((ele[i] >= '0' && ele[i] <= '9') || (ele[i] >= 'a' && ele[i] <= 'z')){
+                sb.append(ele[i]);
+            }else if ((ele[i] >= 'A' && ele[i] <= 'Z')){
+                sb.append((char) (ele[i] + 'a'-'A'));
             }
         }
-        s = s.replace(" ","");
-        StringBuffer sb = new StringBuffer(s);
-        sb.reverse();
-        if (s.equals(sb.toString())){
-            return true;
-        }else {
-            return false;
-        }
+        return sb.toString().equals(sb.reverse().toString());
     }
 
     public static void main(String[] args) {
         IsPalindrome isPalindrome = new IsPalindrome();
-        isPalindrome.isPalindrome("0P");
+        System.out.println(isPalindrome.isPalindrome("0P"));
+        StringBuffer sb = new StringBuffer();
+        sb.append(0);
+        sb.append('p');
+
+        System.out.println(sb.toString().equals("0p"));
     }
 }
