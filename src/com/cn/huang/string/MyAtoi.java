@@ -81,9 +81,9 @@ public class MyAtoi {
             if (!(ele[0] >= '0' && ele[0] <= '9')){
                 return 0;
             }
-            for (int i = 0; i < ele.length; i++) {
-                if (ele[i] >= '0' && ele[i] <= '9') {
-                    sb.append(ele[i]);
+            for (char c : ele) {
+                if (c >= '0' && c <= '9') {
+                    sb.append(c);
                 } else {
                     break;
                 }
@@ -97,10 +97,10 @@ public class MyAtoi {
             if (!(ele[0] >= '0' && ele[0] <= '9')){
                 return 0;
             }
-            for (int i = 0; i < ele.length; i++) {
-                if (ele[i] >= '0' && ele[i] <= '9') {
-                    sb.append(ele[i]);
-                }else {
+            for (char c : ele) {
+                if (c >= '0' && c <= '9') {
+                    sb.append(c);
+                } else {
                     break;
                 }
             }
