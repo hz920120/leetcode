@@ -30,16 +30,28 @@ import java.util.Arrays;
  */
 public class Merge {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
-        //先把nums2赋值给nums1
-        for (int i = 0 ; i < n; i++) {
-            nums1[m+i] = nums2[i];
+        //nums1、nums2都为有序整数数组，所以从nums1尾端入手开始插入nums2
+
+        //定义指针，分别指向nums1有效元素的尾端和nums2有效元素的尾端
+        int pointer1 = m-1;
+        int pointer2 = n-1;
+        //插入指针，为nums1数组最右端
+        int len = nums1.length - 1;
+
+        //循环条件为指针越界
+        while ((pointer1 >=0) && (pointer2 >=0)){
+            //比较两对应元素，谁大就放指针len处；哪边取元素，哪边移动指针
+            nums1[len--] = nums1[pointer1] > nums2[pointer2] ? nums1[pointer1--] : nums2[pointer2--];
         }
-        Arrays.sort(nums1);
+
+        //处理特殊情况：nums1头元素大小在nums2元素中间，需要把比nums1头元素小的元素全部copy到nums1的左端
+        System.arraycopy(nums2,0,nums1,0,pointer2+1);
     }
+
 
     public static void main(String[] args) {
         int[] nums1 = {1,2,3,0,0,0};
-        int[] nums2 = {2,5,6};
+        int[] nums2 = {0,5,6};
         Merge merge = new Merge();
         merge.merge(nums1,3,nums2,3);
         System.out.println(1);
