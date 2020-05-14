@@ -32,33 +32,32 @@ import java.util.*;
  */
 public class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> res  = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
         if (root == null){
             return res;
         }
-
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-
         while (!queue.isEmpty()){
-            List<Integer> tmp = new ArrayList<>();
+            List<Integer> level = new ArrayList<>();
             int len = queue.size();
             for (int i = 0; i < len; i++) {
-                TreeNode treeNode = queue.poll();
-                tmp.add(treeNode.val);
-                if (treeNode.left!=null){
-                    queue.offer(treeNode.left);
+                TreeNode node = queue.poll();
+                level.add(node.val);
+                if (node.left!=null){
+                    queue.offer(node.left);
                 }
-                if (treeNode.right!=null){
-                    queue.offer(treeNode.right);
+                if (node.right!=null){
+                    queue.offer(node.right);
                 }
             }
-            res.add(tmp);
+            res.add(level);
         }
         return res;
     }
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
+        Solution solution = new Solution();
+        solution.levelOrder(TreeNode.mkTree("[3,9,20,null,null,15,7]"));
     }
 }

@@ -2,7 +2,7 @@
  * Miya.com Inc.
  * Copyright (c) 2004-2020 All Rights Reserved.
  */
-package com.cn.huang.problem.may.Solution;
+package com.cn.huang.problem.may.d_20200513_question_103;
 
 import com.cn.huang.utils.TreeNode;
 
@@ -30,7 +30,7 @@ import java.util.*;
  * @author huangzuo
  * @version : d_20200513_question_103.java, v 0.1 2020年05月13日 11:47 下午 huangzuo Exp $
  */
-public class d_20200513_question_103 {
+public class Solution {
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
@@ -45,12 +45,14 @@ public class d_20200513_question_103 {
             int len = queue.size();
             for (int i = 0; i < len; i++) {
                 TreeNode treeNode = queue.poll();
-                list.add(treeNode.val);
+                if (reverse){
+                    list.add(0,treeNode.val);
+                }else {
+                    list.add(treeNode.val);
+                }
+
                 if (treeNode.left!=null){queue.offer(treeNode.left);}
                 if (treeNode.right!=null){queue.offer(treeNode.right);}
-            }
-            if (reverse){
-                Collections.reverse(list);
             }
             res.add(list);
             reverse = !reverse;
