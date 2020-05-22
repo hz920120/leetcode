@@ -32,22 +32,35 @@ public class RemoveNthFromEnd {
         if (head == null){
             return null;
         }
+        //end为结束节点，now为当前节点，pre为now节点的前一节点
         ListNode end,now = head,pre = head;
         for (int i = 0; ; i++) {
+            /*如果删除倒数第一个节点，那么删除的结点的next == null；
+            如果删除倒数第二个节点，那么删除的结点的next.next == null；
+            故把当前节点移动n次next，如果为空，即为删除几点*/
             end = getNode(now,n);
+            //如果i=0时，end就为空，说明删除的是头结点，直接返回
             if (i==0 && end == null){
                 return head.next;
             }
+            //如果end为null，说明now为删除节点，把pre节点与now.next连接，返回head
             if (end == null){
                 pre.next = now.next;
                 return head;
             }else {
+                //如果end不为null，pre向右移动一位，now向右移动一位，继续循环
                 pre = now;
                 now = now.next;
             }
         }
     }
 
+    /**
+     * 找到当前节点向右移动n次后的结点
+     * @param head
+     * @param n
+     * @return
+     */
     private ListNode getNode(ListNode head,int n){
         for (int i = 0; i < n; i++) {
             head = head.next;
