@@ -37,7 +37,7 @@ public class RemoveNthFromEnd {
         for (int i = 0; ; i++) {
             /*如果删除倒数第一个节点，那么删除的结点的next == null；
             如果删除倒数第二个节点，那么删除的结点的next.next == null；
-            故把当前节点移动n次next，如果为空，即为删除几点*/
+            故把当前节点移动n次next，如果为空，即为删除节点*/
             end = getNode(now,n);
             //如果i=0时，end就为空，说明删除的是头结点，直接返回
             if (i==0 && end == null){
