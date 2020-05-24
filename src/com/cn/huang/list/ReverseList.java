@@ -28,19 +28,15 @@ public class ReverseList {
         if (head == null){
             return null;
         }
-        List<ListNode> listNodes = new ArrayList<>();
-        while (head != null){
-            listNodes.add(0,new ListNode(head.val));
-            head = head.next;
-        }
+        ListNode curr = head,pre = null,temp;
+        while (curr != null){
+            temp = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = temp;
 
-        ListNode res = new ListNode(listNodes.get(0).val);
-        ListNode resHead = res;
-        for (int i = 1; i < listNodes.size(); i++) {
-            resHead.next = listNodes.get(i);
-            resHead = resHead.next;
         }
-        return res;
+        return pre;
     }
 
     public static void main(String[] args) {
