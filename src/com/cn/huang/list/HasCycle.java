@@ -7,7 +7,9 @@ package com.cn.huang.list;
 import com.cn.huang.utils.ListNode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author huangzuo
@@ -18,18 +20,16 @@ public class HasCycle {
         if (head == null){
             return false;
         }
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; ; i++) {
-            if (head == null){
-                return false;
-            }
-            if (map.get(head.hashCode()) == null) {
-                map.put(head.hashCode(),i);
-                head = head.next;
-            }else {
+        Set<ListNode> set = new HashSet<>();
+        while (head != null){
+            if (set.contains(head)){
                 return true;
+            }else {
+                set.add(head);
             }
+            head = head.next;
         }
+        return false;
     }
 
     public static void main(String[] args) {
