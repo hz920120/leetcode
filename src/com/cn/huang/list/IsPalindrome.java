@@ -31,24 +31,39 @@ public class IsPalindrome {
         if (head == null || head.next == null){
             return true;
         }
-        StringBuffer sb1 = new StringBuffer();
-        StringBuffer sb2 = new StringBuffer();
-        Stack<Integer> stack = new Stack();
-        while (head != null){
-            sb1.append(head.val);
-            stack.push(head.val);
-            head = head.next;
+        ListNode rListNode = reverseList(head);
+        while (head != null && rListNode != null){
+            if (head.val == rListNode.val){
+                head = head.next;
+                rListNode = rListNode.next;
+                continue;
+            }else {
+                return false;
+            }
         }
-        while (!stack.isEmpty()) {
-            sb2.append(stack.pop());
+        return (head == null) & (rListNode == null);
+    }
+
+    public ListNode reverseList(ListNode head) {
+        if (head == null){
+            return null;
         }
-        return sb1.toString().equals(sb2.toString());
+        ListNode curr = head,pre = null,temp;
+        while (curr != null){
+            temp = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = temp;
+
+        }
+        return pre;
     }
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
-        head.next = new ListNode(0);
-        head.next.next = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(1);
         IsPalindrome isPalindrome = new IsPalindrome();
         isPalindrome.isPalindrome(head);
     }

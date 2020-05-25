@@ -21,13 +21,22 @@ public class HasCycle {
             return false;
         }
         Set<ListNode> set = new HashSet<>();
-        while (head != null){
-            if (set.contains(head)){
+        ListNode p1 = head;
+        ListNode p2 = head;
+
+        while (p2 != null){
+            if (set.contains(p2)){
                 return true;
             }else {
-                set.add(head);
+                set.add(p1);
             }
-            head = head.next;
+            p1 = p1.next;
+            p2 = p2.next;
+            if (p2 != null){
+                p2 = p2.next;
+            }else {
+                return false;
+            }
         }
         return false;
     }
@@ -41,6 +50,8 @@ public class HasCycle {
         System.out.println(head.next.hashCode());
         System.out.println(head.next.next.hashCode());
         System.out.println(head.next.next.next.hashCode());
+        HasCycle hasCycle = new HasCycle();
+        hasCycle.hasCycle(head);
     }
 
 }
