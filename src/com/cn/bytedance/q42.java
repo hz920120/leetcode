@@ -4,34 +4,44 @@
  */
 package com.cn.bytedance;
 
-import java.util.Arrays;
-
 /**
  * @author huangzuo
  * @version : q42.java, v 0.1 2020年08月24日 8:19 上午 huangzuo Exp $
  */
 public class q42 {
     public int trap(int[] height) {
-        if (height.length <= 3) {
+        if (height.length < 2) {
             return 0;
         }
-        //找到数组最大值
-        int max = Arrays.stream(height).max().getAsInt();
-        boolean isMax = false;
-        int curr = 0;
         int res = 0;
-        for (int index : height) {
-            if (!isMax && index > curr) {
-                curr = index;
+
+        //最大值与最大值位置（找到一个最大值即可）
+        int max = 0;
+        int maxIndex = 0;
+        for (int i = 0; i < height.length; i++) {
+            if (height[i] > max) {
+                max = height[i];
+                maxIndex = i;
             }
-            if (curr > 0) {
-                res += curr - index;
+        }
+
+        //左边
+        int current = height[0];
+        for (int i = 1; i < maxIndex; i++) {
+            if (height[i] < current) {
+                res += (current - height[i]);
+            } else {
+                current = height[i];
             }
-            if (isMax && index < curr) {
-                curr = index;
-            }
-            if (index == max) {
-                isMax = true;
+        }
+
+        //右边
+        current = height[height.length-1];
+        for (int i = height.length - 2;  i >= maxIndex ; i--) {
+            if (current > height[i]) {
+                res += (current - height[i]);
+            } else {
+                current = height[i];
             }
         }
         return res;
@@ -40,6 +50,6 @@ public class q42 {
     public static void main(String[] args) {
         final q42 q42 = new q42();
         System.out.println(q42.trap(new int[]{
-                0,2,0}));
+                2,0,2}));
     }
 }
