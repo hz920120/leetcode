@@ -13,10 +13,7 @@ import java.util.Stack;
 public class SplitListToParts {
     public ListNode[] splitListToParts(ListNode head, int k) {
         if (head == null) {
-            return null;
-        }
-        if (k == 1) {
-            return new ListNode[] {head};
+            return new ListNode[k];
         }
 
         ListNode[] res = new ListNode[k];
@@ -26,47 +23,20 @@ public class SplitListToParts {
             stack.push(head);
             head = head.next;
         }
-        if (stack.isEmpty()) {
-            for (int i = 0; i < k; i++) {
-                res[i] = null;
-            }
-            return res;
-        }
 
-
-        int groupSize = stack.size() / k;
-        if (groupSize == 0) {
-            int s = stack.size();
-            for (int i = s - 1; i >= 0; i--) {
-                if (stack.size() > 0) {
-                    ListNode curr = stack.pop();
-                    curr.next = null;
-                    res[i] = curr;
-                }
+        if (stack.isEmpty()) return res;
+        int groupMinSize = stack.size() / k;
+        int groupMaxSize = groupMinSize + 1;
+        int currSize = groupMinSize;
+        //从末尾开始以最小容量groupMinSize添加，添加到  stack.size() / groupMaxSize == k+1(数组前面剩余的空间) 开始以groupMaxSize添加
+        for (int i = k - 1; i >= 0 ; i--) {
+            if (stack.size() / groupMaxSize == i+1) currSize = groupMaxSize;
+            ListNode curr = null;
+            for (int j = 0; j < currSize; j++) {
+                curr = stack.pop();
+                if (j == 0) curr.next = null;
             }
-//            else {
-//                res[i] = null;
-//            }
-        } else {
-            for (int i = k - 1; i >= 0; i--) {
-                ListNode curr = null;
-                //最后一个节点直接弹到底
-                if (i == 0) {
-                    curr = stack.pop();
-                    curr.next = null;
-                    while (!stack.isEmpty()) {
-                        curr = stack.pop();
-                    }
-                    res[i] = curr;
-                } else {
-                    //其余分组数多大就弹出几次
-                    for (int j = 0; j < groupSize; j++) {
-                        curr = stack.pop();
-                        if (j == 0) curr.next = null;
-                    }
-                    res[i] = curr;
-                }
-            }
+            res[i] = curr;
         }
 
         return res;
@@ -88,13 +58,23 @@ public class SplitListToParts {
         listNode = listNode.next;
         listNode.next = new ListNode(7);
         listNode = listNode.next;
-//        listNode.next = new ListNode(8);
-//        listNode = listNode.next;
-//        listNode.next = new ListNode(9);
-//        listNode = listNode.next;
-//        listNode.next = new ListNode(10);
-//        listNode = listNode.next;
+        listNode.next = new ListNode(8);
+        listNode = listNode.next;
+        listNode.next = new ListNode(9);
+        listNode = listNode.next;
+        listNode.next = new ListNode(10);
+        listNode = listNode.next;
+        listNode.next = new ListNode(11);
+        listNode = listNode.next;
+        listNode.next = new ListNode(12);
+        listNode = listNode.next;
+        listNode.next = new ListNode(13);
+        listNode = listNode.next;
+        listNode.next = new ListNode(14);
+        listNode = listNode.next;
+        listNode.next = new ListNode(15);
+        listNode = listNode.next;
 
-        splitListToParts.splitListToParts(head, 3);
+        splitListToParts.splitListToParts(head, 10);
     }
 }
