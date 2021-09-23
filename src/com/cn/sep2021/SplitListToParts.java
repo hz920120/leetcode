@@ -12,31 +12,44 @@ import java.util.Stack;
  */
 public class SplitListToParts {
     public ListNode[] splitListToParts(ListNode head, int k) {
-        if (head == null) {
+        if (head == null || k == 0) {
             return new ListNode[k];
         }
 
         ListNode[] res = new ListNode[k];
 
-        Stack<ListNode> stack = new Stack<>();
-        while (head != null) {
-            stack.push(head);
-            head = head.next;
+        ListNode temp = head;
+        int n = 0;
+        while (temp != null) {
+            temp = temp.next;
+            n++;
         }
 
-        if (stack.isEmpty()) return res;
-        int groupMinSize = stack.size() / k;
-        int groupMaxSize = groupMinSize + 1;
-        int currSize = groupMinSize;
-        //从末尾开始以最小容量groupMinSize添加，添加到  stack.size() / groupMaxSize == k+1(数组前面剩余的空间) 开始以groupMaxSize添加
-        for (int i = k - 1; i >= 0 ; i--) {
-            if (stack.size() / groupMaxSize == i+1) currSize = groupMaxSize;
-            ListNode curr = null;
-            for (int j = 0; j < currSize; j++) {
-                curr = stack.pop();
-                if (j == 0) curr.next = null;
+        int minSize = n/k;
+        if (minSize == 0) {
+            for (int i = 0; i < k; i++) {
+                res[i] = head;
+                ListNode t = head.next;
+                head.next = null;
+                head = t;
+                if (head == null) return res;
             }
-            res[i] = curr;
+        } else {
+            int maxSize = minSize + 1;
+            int currSize = maxSize;
+
+            for (int i = 0; i < k; i++) {
+                if ((k - i == n / minSize) && (n % minSize == 0)) currSize = minSize;
+
+                res[i] = head;
+                for (int j = 1; j < currSize; j++) {
+                    head = head.next;
+                }
+                n -= currSize;
+                ListNode t = head.next;
+                head.next = null;
+                head = t;
+            }
         }
 
         return res;
